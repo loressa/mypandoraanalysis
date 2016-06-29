@@ -1,0 +1,3 @@
+
+add_subdirectory(MyPandoraAnalysis)
+add_subdirectory(MyPandoraAnalyzer)
