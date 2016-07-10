@@ -1,6 +1,6 @@
 #include "services_microboone.fcl"
 
-process_name : MyPandoraAnalysis      #The process name must NOT contain any underscores
+process_name : MyPandoraAnalyzer      #The process name must NOT contain any underscores
 
 source : {
   module_type : RootInput
@@ -17,6 +17,7 @@ services : {
   user:
   {
 	#BELOW you see a list of the common services! Uncomment the ones you need.
+	DetectorClocksService:           @local::microboone_detectorclocks
   	#ExptGeoHelperInterface:         @local::microboone_geometry_helper
   	#Geometry:                       @local::microboone_geo
  	#DetectorProperties:             @local::microboone_detproperties
@@ -36,12 +37,6 @@ services : {
 
 }
 
-outputs: {
-  out0: { module_type: RootOutput
-  	         fileName: "MyPandoraAnalyzer.root"
-		 fastCloning: false }
-}
-
 physics: {
 
   producers : {
@@ -57,20 +52,14 @@ physics: {
   }
 
   path0 : [  myana ]
-  path1 : [  out0  ]
 
+  #path1 : [  comma separated list of module labels of analyzer or output modules  ]
   #path2 : [  comma separated list of module labels of analyzer or output modules  ]
   #path3 : [  comma separated list of module labels of analyzer or output modules  ]
 
-  #trigger_paths: [ path0, path1 ]
-  #end_paths:     [ path2, path3 ]
-
-
   #here, just a shorthand: could have done ana: [ myana ] then end_paths: [ ana ]
-  #  ana1: [myana]
-  #stream: [ ana1, out0 ]	
-  #end_paths: [ path0 ]
-  end_paths: [ path0, path1 ]
+  end_paths: [ path0 ]
 
 }
-
+services.user.DetectorClocksService.InheritClockConfig:                                   false
+services.user.DetectorClocksService.TriggerOffsetTPC:                                     -0.400e3

@@ -18,9 +18,6 @@
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
 
-#include "larpandora/LArPandoraInterface/LArPandoraHelper.h"
-
-
 namespace nmspc {
   class MyPandoraAnalyzer;
 }
@@ -54,14 +51,10 @@ nmspc::MyPandoraAnalyzer::MyPandoraAnalyzer(fhicl::ParameterSet const & p)
  // More initializers here.
 {}
 
-void nmspc::MyPandoraAnalyzer::analyze(art::Event const & evt)
+void nmspc::MyPandoraAnalyzer::analyze(art::Event const & e)
 {
   // Implementation of required member function here.
 
-  std::cout << "This is my analyzer!" << std::endl;
-  
-  lar_pandora::PFParticleVector pfParticleList;
-  
 
 }
 
